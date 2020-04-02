@@ -12,21 +12,7 @@ var $noteList = $(".list-container .list-group");
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
-// TODO: import express, create instance, var PORT
-
-// TODO: create middleware code
-
-// TODO: import path package, var `${___dir}db/db.json`
-
-// TODO: create / express route
-// TODO: create algo for / express route
-
-// TODO: create /notes express route
-// TODO: create algo for /notes express route
-
 // A function for getting all notes from the db
-// TODO: convert /api/notes GET route to express
-// TODO: create algo for /api/notes GET express route
 var getNotes = function() {
   return $.ajax({
     url: "/api/notes",
@@ -35,8 +21,6 @@ var getNotes = function() {
 };
 
 // A function for saving a note to the db
-// TODO: convert /api/notes POST route to express
-// TODO: create algo for /api/notes POST express route
 var saveNote = function(note) {
   return $.ajax({
     url: "/api/notes",
@@ -46,8 +30,6 @@ var saveNote = function(note) {
 };
 
 // A function for deleting a note from the db
-// TODO: convert /api/notes DELETE route to express
-// TODO: create algo for /api/notes DELETE express route
 var deleteNote = function(id) {
   return $.ajax({
     url: "api/notes/" + id,
