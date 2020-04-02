@@ -9,17 +9,34 @@ var PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// import path package, var `${___dir}db/db.json`
+// import path package
 var path = require("path");
+var dbJson = path.join(__dirname, "db/db.json");
 
+// import fs
+var fs = require("fs");
 
-// TODO: create / express route
-// TODO: create algo for / express route
+// Basic route that sends the user first to the AJAX Page
+app.get("/public", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
+app.get("/public/assets/js/index.js", function(req, res) {
+    res.sendFile(path.join(__dirname, "/public/assets/js/index.js"));
+});
 
 // TODO: create /notes express route
-// TODO: create algo for /notes express route
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
 
 // TODO: create algo for /api/notes GET express route
+app.get("/api/notes", function(req, res) {
+    console.log(dbJson);
+    var jsn = JSON.parse(fs.readFileSync(dbJson, "utf8"));
+    console.log(jsn);
+    return res.json(jsn);
+});
 
 // TODO: create algo for /api/notes POST express route
 
