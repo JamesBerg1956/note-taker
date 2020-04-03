@@ -48,7 +48,7 @@ app.get("/api/notes", function(req, res) {
     return res.json(jsn);
 });
 
-// TODO: create algo for /api/notes POST express route
+// create algo for /api/notes POST express route
 app.post("/api/notes", function(req, res){
 
     // create create json object from db/db.json file 
@@ -82,12 +82,42 @@ app.post("/api/notes", function(req, res){
         if(err){return console.log(err)};
     });
 
-    // return new note object
-    return note;
+    // respond with note object just added
+    res.json(jsn);
 
 });
 
-// TODO: create algo for /api/notes DELETE express route
+// create algo for /api/notes DELETE express route
+app.delete("/api/notes/:id", function(req, res){
+
+    // create note id of note to delete
+    var idToDelete = req.params.id.replace(":","");
+    
+    // get json of db/db.json
+    let jsn = JSON.parse(fs.readFileSync(dbJson, "utf8")); 
+
+    // loop through json and remove note that requested note id to delete
+    for (let i = 0; i < jsn.length; i++) {
+        // if id property of current note object equals id to be deleted
+        if(jsn[i].id == idToDelete){
+            // then remove that note object from the array
+            jsn.splice(i, 1);
+        }
+    }
+
+    // create stringified version of jsn
+    const strJsn = JSON.stringify(jsn);
+
+    // write json back to db/db.json
+    fs.writeFile(dbJson, strJsn, function(err){
+        // if error console error
+        if(err){return console.log(err)};
+    });
+
+    // respond with note object just deleted
+    res.json(jsn);
+
+});
 
 // Starts the server to begin listening
 // =============================================================

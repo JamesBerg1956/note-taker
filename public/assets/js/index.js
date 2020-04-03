@@ -22,17 +22,20 @@ var getNotes = function() {
 
 // A function for saving a note to the db
 var saveNote = function(note) {
-  return $.ajax({
-    url: "/api/notes",
-    data: note,
-    method: "POST"
-  });
+    console.log("saveNote: ")
+    console.log(note);
+    return $.ajax({
+      url: "/api/notes",
+      data: note,
+      method: "POST"
+    });
 };
+
 
 // A function for deleting a note from the db
 var deleteNote = function(id) {
   return $.ajax({
-    url: "api/notes/" + id,
+    url: "api/notes/:" + id,
     method: "DELETE"
   });
 };
@@ -75,7 +78,7 @@ var renderActiveNote = function() {
 
 // START handleNoteSave - Get the note data from the inputs, save it to the db and update the view
 var handleNoteSave = function() {
-  
+  console.log("outer handleNoteSave: ");
   // create new note object
   var newNote = {
     // title prop: value of .note-title
@@ -83,9 +86,11 @@ var handleNoteSave = function() {
     // title prop: value of .note-text
     text: $noteText.val()
   };
-
+  console.log(newNote);
   // call /api/notes POST express route, which also assigns newNote to activeNote
   saveNote(newNote).then(function(data) {
+    console.log("inner handleNotesSave: ");
+    console.log(data);
     // call getAndRenderNotes() - create li, span, i elements in DOM
     getAndRenderNotes();
     // call renderActiveNote() - populate values of .note-title and .note-text with activeNote
@@ -111,7 +116,7 @@ var handleNoteDelete = function(event) {
     // delete the current activeNote object
     activeNote = {};
   }
-
+  
   // call /api/notes DELETE express route
   deleteNote(note.id).then(function() {
     // call getAndRenderNotes() - create li, span, i elements in DOM
@@ -164,12 +169,13 @@ var handleRenderSaveBtn = function() {
 
 // START renderNoteList - Render's the list of note titles
 var renderNoteList = function(notes) {
-  
+  console.log("renderNoteList: ")
+  console.log(notes)
   // remove all elements from the .list-group <ul> element
   $noteList.empty();
   // create blank array to store <li> elements
   var noteListItems = [];
-  console.log(notes);
+  
   // START loop through notes array - from function parameter
   for (var i = 0; i < notes.length; i++) {
 
@@ -204,7 +210,7 @@ var renderNoteList = function(notes) {
 
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function() {
-
+  console.log("outer getAndRenderNotes")
   // pass the db.json to the renderNoteList() function via the /api/notes GET express route and render the list of notes and titles
   return getNotes().then(function(data) {
     renderNoteList(data);
