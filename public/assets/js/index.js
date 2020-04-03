@@ -2,9 +2,9 @@
 var $noteTitle = $(".note-title");
 // declare var for note-textarea active text areas - calls handleRenderSaveBtn() on keyup
 var $noteText = $(".note-textarea");
-// declare var for save-note icon - calls handleNoteSave on click
+// declare var for save-note floppy disc icon - calls handleNoteSave on click
 var $saveNoteBtn = $(".save-note");
-// declare var for new-note icon - calls handleNewNoteView() on click
+// declare var for new-note pencil icon - calls handleNewNoteView() on click
 var $newNoteBtn = $(".new-note");
 // declare var of save note cards - .list group opens the note for editing and .delete note will be an icon that deletes the note
 var $noteList = $(".list-container .list-group");
@@ -169,7 +169,7 @@ var renderNoteList = function(notes) {
   $noteList.empty();
   // create blank array to store <li> elements
   var noteListItems = [];
-
+  console.log(notes);
   // START loop through notes array - from function parameter
   for (var i = 0; i < notes.length; i++) {
 
