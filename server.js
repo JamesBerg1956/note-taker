@@ -31,7 +31,7 @@ app.get("/public/assets/css/styles.css", function(req, res) {
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
     // send index.html file as response
-    res.sendFile(path.join(__dirname, "public/index.html"));
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // /notes express route
