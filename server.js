@@ -3,7 +3,7 @@ const express = require("express");
 // create instance of express
 const app = express();
 // create var PORT for express to listen to
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // convert queryString request from client to json
 app.use(express.urlencoded({ extended: true }));
